@@ -18,10 +18,45 @@ export const Header = styled('header', {
   alignItems: 'center',
   justifyContent: 'space-between',
 
-  a: {
+  button: {
     backgroundColor: '$gray800',
     padding: '0.75rem',
     borderRadius: 8,
     color: '$gray300',
+    border: 'none',
+    cursor: 'pointer',
+
+    '&:hover': {
+      Transition: 'all 0.5s',
+      backgroundColor: '#202024c9'
+    }
+  }
+})
+
+export const ShoppingCart = styled('div', {
+  position: 'absolute',
+  zIndex: 1,
+  background: '$gray800',
+  top: 0,
+  right: 0,
+  width: '30rem',
+  minHeight: '100vh',
+  padding: '3rem',
+  display: 'none',
+
+  '&.active': {
+    display: 'initial',
+  },
+
+  button: {
+    border: 'none',
+    background: 'none',
+    color: '$gray100',
+    cursor: 'pointer',
+
+    '&:hover': {
+      color: '#d42020',
+      transition: 'all 0.2s'
+    }
   }
 })

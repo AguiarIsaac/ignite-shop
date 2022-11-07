@@ -56,7 +56,9 @@ export const getStaticProps: GetStaticProps = async () => {
     expand: ['data.default_price']
   });
 
+  const teste = await stripe.products.list
 
+  console.log(teste)
   const products = response.data.map(product => {
     const price = product.default_price as Stripe.Price;
 
@@ -77,4 +79,5 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     revalidate: 60 * 60 * 2 // 2 hours,
   }
+
 }
