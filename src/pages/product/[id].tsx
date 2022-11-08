@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
 import Head from "next/head";
+import { useContext } from "use-context-selector";
+import { ShoppingCart } from "../../context/ShoppingCartContext";
 
 interface ProductProps {
   product: {
@@ -21,23 +23,27 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
   const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+  
+  const ContextCard = useContext(ShoppingCart)
+
 
   async function handleBuyButton() {
-    try {
-      setIsCreatingCheckoutSession(true);
+    // Context.addToCart(product)
+    // try {
+    //   setIsCreatingCheckoutSession(true);
 
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      })
+    //   const response = await axios.post('/api/checkout', {
+    //     priceId: product.defaultPriceId,
+    //   })
 
-      const { checkoutUrl } = response.data;
+    //   const { checkoutUrl } = response.data;
 
-      window.location.href = checkoutUrl;
-    } catch (err) {
-      setIsCreatingCheckoutSession(false);
+    //   window.location.href = checkoutUrl;
+    // } catch (err) {
+    //   setIsCreatingCheckoutSession(false);
 
-      alert('Falha ao redirecionar ao checkout!')
-    }
+    //   alert('Falha ao redirecionar ao checkout!')
+    // }
   }
 
 

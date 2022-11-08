@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from "next/link"
 import { Handbag, X } from "phosphor-react"
 import { useState } from "react"
+import { ShoppingCartProvider } from '../context/ShoppingCartContext' 
 
 globalStyles()
 
@@ -20,22 +21,24 @@ export default function App({ Component, pageProps }) {
   }
   
   return (
-    <Container>
-      <Header>
-        <Image src={logoImg} alt="" />
-        <Link href="#">
-          <button type="button" onClick={handleOpenMenu} title="Open Cart"><Handbag size={32} /></button>
-        </Link>
-      </Header>
+    <ShoppingCartProvider>
+      <Container>
+        <Header>
+          <Image src={logoImg} alt="" />
+          <Link href="#">
+            <button type="button" onClick={handleOpenMenu} title="Open Cart"><Handbag size={32} /></button>
+          </Link>
+        </Header>
 
-      <ShoppingCart className={cartItems}>
-        <button type="button" onClick={handleOpenMenu} title="close Cart">
-          <X size={32} /> 
-        </button>
-      </ShoppingCart>
+        <ShoppingCart className={cartItems}>
+          <button type="button" onClick={handleOpenMenu} title="close Cart">
+            <X size={32} /> 
+          </button>
+        </ShoppingCart>
 
-      <Component {...pageProps} />
-    </Container>
+        <Component {...pageProps} />
+      </Container>
+    </ShoppingCartProvider>
   )
 }
 
