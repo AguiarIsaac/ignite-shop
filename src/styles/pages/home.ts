@@ -42,15 +42,35 @@ export const Product = styled('a', {
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
 
-    strong: {
-      fontSize: '$lg'
+    div: {
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.25rem'
+    },
+
+    p: {
+      fontSize: '$md'
     },
 
     span: {
-      fontSize: '$xl',
+      fontSize: '$md',
       fontWeight: 'bold',
       color: '$green300'
     },
+
+    button: {
+      backgroundColor: '$green500',
+      padding: '0.75rem',
+      borderRadius: 8,
+      color: '$gray100',
+      border: 'none',
+      cursor: 'pointer',
+  
+      '&:hover': {
+        Transition: 'all 0.5s',
+        backgroundColor: '$green300'
+      }
+    }
   },
 
   '&:hover': {
