@@ -28,7 +28,7 @@ export default function Product({ product }: ProductProps) {
 
 
   async function handleBuyButton() {
-    // Context.addToCart(product)
+    ContextCard.addToCart(product)
     // try {
     //   setIsCreatingCheckoutSession(true);
 
