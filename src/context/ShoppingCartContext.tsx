@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { createContext } from "react" // Tem que ser assim no Next, pq assim evita renderizações
+import { createContext } from "react"
 
 interface ProductProps {
   id: string
@@ -32,10 +32,6 @@ export function ShoppingCartProvider({children}: ContextProps) {
       setlistProducts([...listProducts, item])
     }
   }
-
-  useEffect(() => {
-    console.log(listProducts)
-  },[listProducts])
   
   return (
     <ShoppingCart.Provider value={{listProducts, addToCart}}>

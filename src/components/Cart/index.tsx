@@ -1,5 +1,5 @@
 import { X } from "phosphor-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
 import { ContentCard, ShoppingCartStyles } from "./styles";
 
@@ -15,7 +15,11 @@ export function Cart() {
       setCartItems('')
     }
   }
-    
+  
+  useEffect(() => {
+    console.log(list)
+  },[list])
+  
   return (
     <ShoppingCartStyles className={cartItems}>
       <button type="button" id="close" onClick={handleOpenMenu} title="close Cart">
