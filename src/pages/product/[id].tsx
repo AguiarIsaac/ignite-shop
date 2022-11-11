@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
 import Head from "next/head";
-import { useContext } from "use-context-selector";
+import { useContext } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
 
 interface ProductProps {

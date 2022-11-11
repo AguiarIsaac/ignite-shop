@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import { createContext } from "use-context-selector"; // Tem que ser assim no Next, pq assim evita renderizações
+import { createContext } from "react" // Tem que ser assim no Next, pq assim evita renderizações
 
 interface ProductProps {
   id: string
