@@ -1,56 +1,6 @@
 import { styled } from "@stitches/react";
 
-export const ShoppingCartStyles = styled('div', {
-  position: 'absolute',
-  zIndex: 1,
-  background: '$gray800',
-  top: 0,
-  right: 0,
-  width: '30rem',
-  minHeight: '100vh',
-  padding: '3rem',
-  display: 'none',
-
-  '&.active': {
-    display: 'initial',
-  },
-
-  '#close': {
-    border: 'none',
-    background: 'none',
-    color: '$gray100',
-    cursor: 'pointer',
-    position: 'absolute',
-    right: '3rem',
-
-    '&:hover': {
-      color: '#d42020',
-      transition: 'all 0.2s'
-    }
-  },
-
-  '.checkoutCart': {
-    button: {
-      marginTop: '3.4rem',
-      padding: '1.25rem',
-      width: '100%',
-      borderRadius: 4,
-      border: 'none',
-      cursor: 'pointer',
-      background: '$green500',
-      color: '$gray100',
-      fontWeight: 'bold',
-      fontSize: '$md',
-
-      '&:hover': {
-        background: '$green300',
-        transition: 'all 0.2s'
-      }
-    }
-  }
-})
-
-export const ContentCard = styled('div', {
+export const ContentCart = styled('div', {
   marginTop: '4.5rem',
   height: '82vh',
   display: 'flex',
