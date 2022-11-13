@@ -3,9 +3,7 @@ import { GetStaticProps, GetStaticPaths } from "next"
 import Image from "next/future/image";
 import Stripe from "stripe";
 import { stripe } from "../../lib/srtipe";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import axios from "axios";
 import Head from "next/head";
 import { useContext } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
@@ -46,6 +44,15 @@ export default function Product({ product }: ProductProps) {
     // }
   }
 
+  function priceFormat(value: any) {
+    const valueFormated = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value / 100)
+
+    return valueFormated
+  }
+
 
   return (
     <>
@@ -59,7 +66,7 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{priceFormat(product.price)}</span>
 
           <p>{product.description}</p>
 
@@ -94,10 +101,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        }).format(price.unit_amount / 100),
+        price: price.unit_amount,
         description: product.description,
         defaultPriceId: price.id
       }

@@ -26,6 +26,15 @@ export default function Home({ products }: HomeProps) {
     }
   });
 
+  function priceFormat(value: any) {
+    const valueFormated = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value / 100)
+
+    return valueFormated
+  }
+
   return (
     <>
       <Head>
@@ -42,7 +51,7 @@ export default function Home({ products }: HomeProps) {
                   <footer>
                     <div>
                       <p>{product.name}</p>
-                      <span>{product.price}</span>
+                      <span>{priceFormat(product.price)}</span>
                     </div>
 
                     <button type="button" title="Adicionar a sacola">
@@ -71,10 +80,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      }).format(price.unit_amount / 100),
+      price: price.unit_amount,
     }
   })
 

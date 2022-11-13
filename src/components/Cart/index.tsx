@@ -1,11 +1,34 @@
+import Image from "next/image";
 import { useContext, useState } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
 import {ContentCart, ImageContainer} from "./styles";
 
+interface ProductProps {
+  id: string
+  name: string
+  imageUrl: string
+  price: string
+  description: string
+  defaultPriceId: string
+}
+
 export function Cart() {
   const contexCard = useContext(ShoppingCart)
   const list = contexCard.listProducts
-  
+
+  function priceFormat(value: any) {
+    const valueFormated = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value / 100)
+
+    return valueFormated
+  }
+
+  function handleRemoveItem(item: ProductProps) {
+    contexCard.removeToCart(item)
+  }
+
   return (
     <ContentCart>
       <div>  
@@ -16,13 +39,13 @@ export function Cart() {
             return (
               <div className="item" key={item.id}>
                 <ImageContainer>
-
+                  <Image src={item.imageUrl} width={120} height={110} alt="" />
                 </ImageContainer>
 
                 <div className="details">
                 <p>{item.name}</p>
-                <strong>{item.price}</strong>
-                <button type="button">Remover</button>
+                <strong>{priceFormat(item.price)}</strong>
+                <button type="button" onClick={() => {handleRemoveItem(item)}}>Remover</button>
               </div>
             </div>
             )
@@ -40,7 +63,7 @@ export function Cart() {
 
           <span>
             <strong>Valor total</strong>
-            <strong id="total">R$ 79,90</strong>
+            <strong id="total">{priceFormat(contexCard.valueTotal)}</strong>
           </span>
         </div>
 
