@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
-import {ContentCart, ImageContainer} from "./styles";
+import {ContentCart, ImageContainer, CartEmpy} from "./styles";
+import axios from "axios";
+import { Bag } from "phosphor-react";
 
 interface ProductProps {
   id: string
@@ -29,6 +31,20 @@ export function Cart() {
     contexCard.removeToCart(item)
   }
 
+  async function CheckoutCart() {
+    try {
+      const response = await axios.post('/api/checkout', {
+        products: list,
+      })
+
+      const { checkoutUrl } = response.data;
+      window.location.href = checkoutUrl;
+
+    } catch (err) {
+      alert('Falha ao redirecionar ao checkout!')
+    }
+  }
+
   return (
     <ContentCart>
       <div>  
@@ -51,6 +67,11 @@ export function Cart() {
             )
           })}
         </div>
+
+        {list.length == 0 && <CartEmpy>
+            <h3>Sacola vazia 😅</h3>
+            <Bag size={64} />
+          </CartEmpy>}
       </div>
 
       <div className="checkoutCart">
@@ -67,7 +88,7 @@ export function Cart() {
           </span>
         </div>
 
-        <button type="button" title="Finalizar Compra">
+        <button type="button" title="Finalizar Compra" onClick={CheckoutCart}>
           Finalizar compra
         </button>
 

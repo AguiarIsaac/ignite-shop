@@ -25,23 +25,8 @@ export default function Product({ product }: ProductProps) {
   const ContextCard = useContext(ShoppingCart)
 
 
-  async function handleBuyButton() {
+  function handleAddToCart() {
     ContextCard.addToCart(product)
-    // try {
-    //   setIsCreatingCheckoutSession(true);
-
-    //   const response = await axios.post('/api/checkout', {
-    //     priceId: product.defaultPriceId,
-    //   })
-
-    //   const { checkoutUrl } = response.data;
-
-    //   window.location.href = checkoutUrl;
-    // } catch (err) {
-    //   setIsCreatingCheckoutSession(false);
-
-    //   alert('Falha ao redirecionar ao checkout!')
-    // }
   }
 
   function priceFormat(value: any) {
@@ -70,7 +55,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button disabled={isCreatingCheckoutSession} onClick={handleBuyButton}>
+          <button disabled={isCreatingCheckoutSession} onClick={handleAddToCart}>
           Comprar agora
           </button>
         </ProductDetails>

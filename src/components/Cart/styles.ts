@@ -90,3 +90,12 @@ export const ImageContainer = styled('div', {
     objectFit: 'cover',
   }
 });
+
+export const CartEmpy = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '2rem',
+  marginTop: '6rem'
+})
