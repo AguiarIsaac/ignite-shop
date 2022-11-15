@@ -45,7 +45,25 @@ export const ContentCart = styled('div', {
   '.details': {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    
+    '.quantity': {
+      display: 'flex',
+      alignItems: 'center',
+      alignContent: 'center',
+      justifyContent: 'center',
+
+      '.controls': {
+        display: 'flex',
+        alignItems: 'center',
+
+        '#add': {
+          '&:hover': {
+            color: '$green300'
+          }
+        }
+      }
+    },
   },
 
   '.purchaseDetails': {

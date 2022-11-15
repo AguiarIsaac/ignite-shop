@@ -61,7 +61,18 @@ export function Cart() {
                 <div className="details">
                 <p>{item.name}</p>
                 <strong>{priceFormat(item.price)}</strong>
-                <button type="button" onClick={() => {handleRemoveItem(item)}}>Remover</button>
+
+                <div className="quantity">
+
+                  <div className="controls">
+                    <button type='button' id="sub">-</button>
+                      <p>1</p>
+                    <button type='button' id="add">+</button>
+                  </div>
+
+                  <button type="button" onClick={() => {handleRemoveItem(item)}}>Remover</button>
+                </div>
+                
               </div>
             </div>
             )
