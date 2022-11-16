@@ -1,20 +1,13 @@
-import Image from "next/image";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
-import {ContentCart, ImageContainer, CartEmpy} from "./styles";
+import {ContentCart, CartEmpy} from "./styles";
 import axios from "axios";
 import { Bag } from "phosphor-react";
+import { ItemCart } from "../ItemCart";
 
-interface ProductProps {
-  id: string
-  name: string
-  imageUrl: string
-  price: string
-  description: string
-  defaultPriceId: string
-}
 
 export function Cart() {
+
   const contexCard = useContext(ShoppingCart)
   const list = contexCard.listProducts
 
@@ -27,9 +20,7 @@ export function Cart() {
     return valueFormated
   }
 
-  function handleRemoveItem(item: ProductProps) {
-    contexCard.removeToCart(item)
-  }
+
 
   async function CheckoutCart() {
     try {
@@ -53,28 +44,17 @@ export function Cart() {
         <div className="itensCart">
           {list.map(item => {
             return (
-              <div className="item" key={item.id}>
-                <ImageContainer>
-                  <Image src={item.imageUrl} width={120} height={110} alt="" />
-                </ImageContainer>
-
-                <div className="details">
-                <p>{item.name}</p>
-                <strong>{priceFormat(item.price)}</strong>
-
-                <div className="quantity">
-
-                  <div className="controls">
-                    <button type='button' id="sub">-</button>
-                      <p>1</p>
-                    <button type='button' id="add">+</button>
-                  </div>
-
-                  <button type="button" onClick={() => {handleRemoveItem(item)}}>Remover</button>
-                </div>
-                
-              </div>
-            </div>
+              <ItemCart
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                imageUrl={item.imageUrl}
+                price={item.price}
+                valueTotalItem={item.valueTotalItem}
+                quantity={item.quantity}
+                description={item.description}
+                defaultPriceId={item.defaultPriceId}
+              />
             )
           })}
         </div>

@@ -14,6 +14,8 @@ interface ProductProps {
     name: string
     imageUrl: string
     price: string
+    quantity: number
+    valueTotalItem: number
     description: string
     defaultPriceId: string
   }
@@ -87,6 +89,8 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
         name: product.name,
         imageUrl: product.images[0],
         price: price.unit_amount,
+        quantity: 1,
+        valueTotalItem: price.unit_amount,
         description: product.description,
         defaultPriceId: price.id
       }
