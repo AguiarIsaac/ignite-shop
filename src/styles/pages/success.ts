@@ -43,8 +43,7 @@ export const PackImages = styled('div', {
 })
 
 export const ImageContainer = styled('div', {
-  width: '100%',
-  Width: 145,
+  width: 145,
   height: 145,
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
   padding: '0.25rem',
