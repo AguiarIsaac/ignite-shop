@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShoppingCart } from "../../context/ShoppingCartContext";
 import {ContentCart, CartEmpy} from "./styles";
 import axios from "axios";
@@ -19,8 +19,6 @@ export function Cart() {
 
     return valueFormated
   }
-
-
 
   async function CheckoutCart() {
     try {
@@ -50,7 +48,6 @@ export function Cart() {
                 name={item.name}
                 imageUrl={item.imageUrl}
                 price={item.price}
-                valueTotalItem={item.valueTotalItem}
                 quantity={item.quantity}
                 description={item.description}
                 defaultPriceId={item.defaultPriceId}
@@ -75,7 +72,9 @@ export function Cart() {
 
           <span>
             <strong>Valor total</strong>
-            <strong id="total">{priceFormat(contexCard.valueTotal)}</strong>
+            {list.length > 0 && <strong id="total">{priceFormat(contexCard.valueTotal)}</strong>}
+            {list.length == 0  && <strong id="total">{priceFormat(0)}</strong>}
+
           </span>
         </div>
 

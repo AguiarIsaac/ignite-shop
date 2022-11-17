@@ -7,7 +7,6 @@ interface ProductProps {
   imageUrl: string
   price: string
   quantity: number
-  valueTotalItem: number
   description: string
   defaultPriceId: string
 }
@@ -68,16 +67,23 @@ export function ShoppingCartProvider({children}: ContextProps) {
   }
 
   function CalcValueTotal() {
-    let calc = 0
-    for(let c = 0; c < listProducts.length; c++) {
-        calc += listProducts[c].valueTotalItem
+    if(listProducts.length > 0) {
+      const valueTotalItems = listProducts.map(item => {
+        return Number(item.price) * item.quantity
+      })
+  
+      const somaTotal = valueTotalItems.reduce((a, i) => { return a + i})
+      
+      setValueTotal(somaTotal)
     }
-    setValueTotal(calc)
+
+    if(!listProducts) {
+      setValueTotal(0)
+    }
   }
 
   useEffect(() => {
     CalcValueTotal()
-    console.log(listProducts)
   },[listProducts])
   
   return (

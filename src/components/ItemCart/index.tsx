@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ShoppingCart } from "../../context/ShoppingCartContext"
 import { ImageContainer, ItemCartElement } from "./styles"
 
@@ -9,7 +9,6 @@ interface ProductProps {
   imageUrl: string
   price: string
   quantity: number
-  valueTotalItem: number
   description: string
   defaultPriceId: string
 }
@@ -30,7 +29,6 @@ export function ItemCart(props: ProductProps) {
       imageUrl: props.imageUrl,
       price: props.price,
       quantity: newQuantity + 1,
-      valueTotalItem: props.valueTotalItem,
       description: props.description,
       defaultPriceId: props.defaultPriceId
     }
@@ -42,6 +40,18 @@ export function ItemCart(props: ProductProps) {
     if(newQuantity > 1) {
         const addedQuantity = newQuantity - 1
         setNewQuantity(addedQuantity)
+
+        const itemFormated = {
+          id: props.id,
+          name: props.name,
+          imageUrl: props.imageUrl,
+          price: props.price,
+          quantity: newQuantity - 1,
+          description: props.description,
+          defaultPriceId: props.defaultPriceId
+        }
+    
+        contexCard.changeQuantityItem(itemFormated)
     }
   }
 
@@ -57,6 +67,11 @@ export function ItemCart(props: ProductProps) {
   function handleRemoveItem(item: ProductProps) {
     contexCard.removeToCart(item)
   }
+
+  useEffect(() => {
+    const mutiplicateCalc = Number(props.price) * newQuantity
+    setTotal(mutiplicateCalc)
+  },[newQuantity])
 
   return (
     <ItemCartElement className="item" key={props.id}>

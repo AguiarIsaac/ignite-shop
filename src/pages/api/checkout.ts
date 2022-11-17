@@ -6,6 +6,7 @@ interface ProductProps {
   name: string
   imageUrl: string
   price: string
+  quantity: number
   description: string
   defaultPriceId: string
 }
@@ -31,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     mode: 'payment',
     line_items: products.map((item) => ({
       price: item.defaultPriceId,
-      quantity: 1,
+      quantity: item.quantity,
     })),
 
   })
